@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<div id="messenger"></div>
+<head>
+    <meta charset="UTF-8">
+    <title>~/startpage</title>
+    <style>
+	:root {
+    --color-bg: #282828;
+    --color-fg: #EADBB2;
+    --color-link: #8F9191;
+    --color-link-visited: #668F8B;
+    --color-link-hover: #FA7921 ;
+}
+
+html, body {
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family: "Fira Code";
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+  
+.layout {
+  width: 2560px;
+  height: 1440px;
+
+  display: grid;
+  grid:
+    ". . . . . . ." 1fr
+    "img img img . title title ." 1fr
+    "img img img link1 link2 link3 link4" 1fr
+    "img img img . . . ." 1fr
+    "search search search search search search search" 1fr
+    / 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  gap: 8px;
+}
+
+.img { grid-area: img; text-align: center;}
+.title { grid-area: title; font-size: 20px;}
+.link1 { grid-area: link1; }
+.link2 { grid-area: link2; }
+.link3 { grid-area: link3; }
+.link4 { grid-area: link4; }
+.search { grid-area: search; text-align: center; }
+
+.head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 40px;
+  padding-top: 60px;
+}
+
+.category {
+  display: flex;
+  flex-direction: column;
+  width: 180px;
+}
+
+.bookmarks {
+  display: flex;
+  justify-content: center;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+li {
+  font-size: 16px;
+  list-style-type: none;
+  padding: 5px
+}
+
+a:link {
+  text-decoration: none;
+  color: var(--color-link);
+}
+
+a:visited {
+  color: var(--color-link-visited);
+}
+
+a:hover {
+  color: var(--color-link-hover);
+}
+
+.blinking {
+  animation: opacity 1s ease-in-out infinite;
+  opacity: 1;
+}
+
+@keyframes opacity {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+    </style>
+</head>
+
+<body>
+  <section class="layout">
+    <div class="img">
+        <img style="height: 600px; width:600px"; src="https://raw.githubusercontent.com/PrettyCoffee/fluidity/main/src/data/pictures/pic_4.jpg">
+    </div>
+    <div class="title">
+      <div class="head">
+        <p>> cd ~/<span class="blinking">_</span></p>
+      </div>
+    </div>
+    <div class="link1">
+      <div class="links">
+        <li class="title">work</li>
+        <li><a href="https://gmail.com">gmail</a></li>
+        <li><a href="https://outlook.office.com">outlook</a></li>
+        <li><a href="https://linkedin.com">linkedin</a></li>
+        <li><a href="https://vim.rtorr.com/">vim</a></li>
+      </div>
+    </div>
+    <div class="link2">
+      <div class="links">
+        <li class="title">dev</li>
+        <li><a href="https://github.com/">github</a></li>
+        <li><a href="https://lobste.rs/">lobste.rs</a></li>
+        <li><a href="https://mankier.com/">mankier</a></li>
+        <li><a href="https://devdocs.io/">devdocs</a></li>
+      </div>
+    </div>
+    <div class="link3">
+      <div class="links">
+                        <li class="title"><a style="color: #EADBB2" href="https://reddit.com">reddit</a></li>
+                        <li><a href="https://reddit.com/r/programming/">programming</a></li>
+                        <li><a href="https://reddit.com/r/selfhosted/">selfhosted</a></li>
+                        <li><a href="https://reddit.com/r/unixporn/">unixporn</a></li>
+                        <li><a href="https://reddit.com/r/mechanicalkeyboards/">mk</a></li>
+                    </div>
+    </div>
+    <div class="link4">
+      <div class="links">
+                        <li class="title">test</li>
+                        <li><a href="https://monkeytype.com/">monkeytype</a></li>
+                        <li><a href="https://youtube.com/">youtube</a></li>
+                        <li><a href="https://twitch.tv/">twitch</a></li>
+                        <li><a href="https://netflix.com/">netflix</a></li>
+
+                    </div>
+    </div>
+    <div class="search">
+      <form method="get" id="search" action="http://duckduckgo.com/">
+      <input type="text" name="q" maxlength="255" placeholder="Search&hellip;"/>
+      <input type="submit" value="DuckDuckGo Search" style="visibility: hidden;" />
+      </form>
+    </div>
+    <div id="messenger"></div>
+    <div></div>
+  </section>
+</body>
+
+</html>
