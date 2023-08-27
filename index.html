@@ -2,238 +2,249 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>~/startpage</title>
-    <style>
-	:root {
-    --color-bg: #282828;
-    --color-fg: #EADBB2;
-    --color-link: #8F9191;
-    --color-link-visited: #668F8B;
-    --color-link-hover: #FA7921 ;
-}
+  <meta charset="UTF-8">
+  <title>~/startpage</title>
+  <style>
+    :root {
+      --color-bg: #282828;
+      --color-fg: #EADBB2;
+      --color-link: #8F9191;
+      --color-link-visited: #668F8B;
+      --color-link-hover: #FA7921;
+    }
 
-html, body {
-  background: var(--color-bg);
-  color: var(--color-fg);
-  font-family: "Fira Code";
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-}
-  
-.layout {
-  width: 2560px;
-  height: 1440px;
+    html,
+    body {
+      background: var(--color-bg);
+      color: var(--color-fg);
+      font-family: "Fira Code";
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
 
-  display: grid;
-  grid:
-    ". . . . . . ." 1fr
-    "img img img . title title ." 1fr
-    "img img img link1 link2 link3 link4" 1fr
-    "img img img . . . ." 1fr
-    "search search search search search search search" 1fr
-    / 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  gap: 8px;
-}
+    .layout {
+      width: 2560px;
+      height: 1440px;
+      display: grid;
+      grid:
+        ". . . . . . ."1fr 
+        "img img img . title title ."1fr 
+        "img img img links links links links"1fr 
+        "img img img . . . ."1fr 
+        "search search search search search search search"1fr 
+        / 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+      gap: 8px;
+    }
 
-.img { grid-area: img; text-align: center;}
-.title { grid-area: title; font-size: 20px;}
-.link1 { grid-area: link1; }
-.link2 { grid-area: link2; }
-.link3 { grid-area: link3; }
-.link4 { grid-area: link4; }
-.search { grid-area: search; text-align: center; }
+    .img {
+      grid-area: img;
+      text-align: center;
+    }
 
-.head {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 40px;
-  padding-top: 60px;
-}
+    .title {
+      grid-area: title;
+      font-size: 20px;
+    }
 
-.category {
-  display: flex;
-  flex-direction: column;
-  width: 180px;
-}
+    .links {
+      grid-area: links;
+    }
 
-.bookmarks {
-  display: flex;
-  justify-content: center;
-}
+    .search {
+      grid-area: search;
+      text-align: center;
+    }
 
-.links {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
+    .head {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 40px;
+      padding-top: 60px;
+    }
 
-.accordion {
-    background-color: #eee;
-    color: #444;
-    cursor: prointer;
-    padding: 18px;
-    width: 100%;
-    border: none;
-    text-align: left;
-    outline: none;
-    font-size: 15px;
-    transition: 0.4s;
-}
+    .category {
+      display: flex;
+      flex-direction: column;
+      width: 180px;
+    }
 
-.panel {
-    padding: 0 18px;
-    background-color: white;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.2s ease-out;
-}
+    .bookmarks {
+      display: flex;
+      justify-content: center;
+    }
 
-.active {
-    background-color: #005000;
-}
+    .links {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
 
-.accordion:hover {
-    background-color: #ffffff;
-}
+    .container {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      padding: 0;
+    }
 
-.accordion:after {
-    content: '\002B';
-    color: #777;
-    font-weight: bold;
-    float: right;
-    margin-left: 5px;
-  }
+    .choice {
+      height: 180px;
+      box-sizing: border-box;
+      padding: 0;
+      overflow: hidden;
+      float: left;
+      align-items: center;
+      transition: width 0.2s;
+      border-radius: 3px;
+      background-color: grey
+    }
 
-.active:after {
-    content: '\2212';
-}
+    .expand {
+      width: 65%;
+    }
 
-li {
-  font-size: 16px;
-  list-style-type: none;
-  padding: 5px
-}
+    .unset {
+      width: 16%;
+      color: black !important;
+      background-color: #ddd !important;
+    }
 
-a:link {
-  text-decoration: none;
-  color: var(--color-link);
-}
+    .small {
+      width: 5%;
+      background-color: #ddd !important;
+    }
 
-a:visited {
-  color: var(--color-link-visited);
-}
+    .small>div {
+      opacity: 0;
+    }
 
-a:hover {
-  color: var(--color-link-hover);
-}
+    .unset>div>p {
+      opacity: 0;
+    }
 
-.blinking {
-  animation: opacity 1s ease-in-out infinite;
-  opacity: 1;
-}
+    .expand>div {
+      transition-delay: 200ms;
+      opacity: 1;
+    }
 
-@keyframes opacity {
-  0% {
-    opacity: 1;
-  }
+    li {
+      font-size: 16px;
+      list-style-type: none;
+      padding: 5px
+    }
 
-  50% {
-    opacity: 0;
-  }
+    .blinking {
+      animation: opacity 1s ease-in-out infinite;
+      opacity: 1;
+    }
 
-  100% {
-    opacity: 1;
-  }
-}
+    @keyframes opacity {
+      0% {
+        opacity: 1;
+      }
 
-</style>
+      50% {
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 1;
+      }
+    }
+  </style>
 
 </head>
 
 <body>
   <section class="layout">
     <div class="img">
-        <img style="height: 600px; width:600px"; src="https://raw.githubusercontent.com/PrettyCoffee/fluidity/main/src/data/pictures/pic_4.jpg">
+      <img style="height: 600px; width:600px" ; src="https://raw.githubusercontent.com/PrettyCoffee/fluidity/main/src/data/pictures/pic_4.jpg">
     </div>
     <div class="title">
       <div class="head">
         <p>> cd ~/<span class="blinking">_</span></p>
       </div>
     </div>
-    <div class="link1">
-      <button class="accordion">work</button>
-        <div class="panel">
-          <li><a href="https://gmail.com">gmail</a></li>
-          <li><a href="https://outlook.office.com">outlook</a></li>
-          <li><a href="https://linkedin.com">linkedin</a></li>
-          <li><a href="https://vim.rtorr.com/">vim</a></li>
+    <div class="links">
+      <div class="container">
+
+        <div class="card choice unset">
+          <div class="card-body">
+            <h5 class="card-title">Card 1</h5>
+            <p class="card-text"><a href="https://www.reddit.com">reddit</a></p>
+            
+            <button type="button" class="btn">twat</button>
+          </div>
         </div>
-    </div>
-    <div class="link2">
-      <button class="accordion">dev</button>
-        <div class="panel">
-        <li><a href="https://github.com/">github</a></li>
-        <li><a href="https://lobste.rs/">lobste.rs</a></li>
-        <li><a href="https://mankier.com/">mankier</a></li>
-        <li><a href="https://devdocs.io/">devdocs</a></li>
+
+        <div class="card choice unset">
+          <div class="card-body">
+            <h5 class="card-title">Card 2</h5>
+            <p class="card-text">quick</p>
+            <button type="button" class="btn">Button</button>
+          </div>
+        </div>
+
+        <div class="card choice unset ">
+          <div class="card-body">
+            <h5 class="card-title">Card 3</h5>
+            <p class="card-text">example</p>
+            <button type="button" class="btn ">Button</button>
+          </div>
+        </div>
+
+        <div class="card choice unset">
+          <div class="card-body">
+            <h5 class="card-title">Card 4</h5>
+            <p class="card-text">text</p>
+            <button type="button" class="btn">Button</button>
+          </div>
+        </div>
+
+        <div class="card choice unset">
+          <div class="card-body">
+            <h5 class="card-title">Card 5</h5>
+            <p class="card-text">content.</p>
+            <button type="button" class="btn ">Button</button>
+          </div>
+        </div>
+
+        <div class="card choice unset">
+          <div class="card-body">
+            <h5 class="card-title">Card 6</h5>
+            <p class="card-text">content.</p>
+            <button type="button" class="btn">Button</button>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="link3">
-      <div class="links">
-                        <li class="title"><a style="color: #EADBB2" href="https://reddit.com">reddit</a></li>
-                        <li><a href="https://reddit.com/r/programming/">programming</a></li>
-                        <li><a href="https://reddit.com/r/selfhosted/">selfhosted</a></li>
-                        <li><a href="https://reddit.com/r/unixporn/">unixporn</a></li>
-                        <li><a href="https://reddit.com/r/mechanicalkeyboards/">mk</a></li>
-                    </div>
-    </div>
-    <div class="link4">
-      <div class="links">
-                        <li class="title">test</li>
-                        <li><a href="https://monkeytype.com/">monkeytype</a></li>
-                        <li><a href="https://youtube.com/">youtube</a></li>
-                        <li><a href="https://twitch.tv/">twitch</a></li>
-                        <li><a href="https://netflix.com/">netflix</a></li>
 
-                    </div>
-    </div>
     <div class="search">
       <form method="get" id="search" action="http://duckduckgo.com/">
-      <input type="text" name="q" maxlength="255" placeholder="Search&hellip;"/>
-      <input type="submit" value="DuckDuckGo Search" style="visibility: hidden;" />
+        <input type="text" name="q" maxlength="255" placeholder="Search&hellip;" />
+        <input type="submit" value="DuckDuckGo Search" style="visibility: hidden;" />
       </form>
     </div>
-    <div id="messenger"></div>
-    <div></div>
+
   </section>
 
-<script>
-var acc = document.getElementsByClassName("accordion");
-
-for (let i = 0; i < acc.length; i++) {
-  acc[i].addEventListener("click", function() {
-    for (let j = 0; j < acc.length; j++) {
-    acc[j].classList.remove("active");
-      if(j!=i){
-        acc[j].nextElementSibling.style.maxHeight = null;
-      }
-    }
-    this.classList.add("active");
-    var panel = this.nextElementSibling;
-    if (panel.style.maxHeight){
-      panel.style.maxHeight = null;
-    } else {
-      panel.style.maxHeight = panel.scrollHeight + "px";
-    }
-  });
-}
-</script>
+  <script>
+    const choiceArray = document.querySelectorAll(".choice")
+    choiceArray.forEach((card) => {
+      card.addEventListener("click", () => {
+        choiceArray.forEach((element) => {
+          element.classList.remove("expand", "unset")
+          element.classList.add('small')
+        })
+        card.classList.remove("small")
+        card.classList.add('expand')
+      });
+    });
+  </script>
 
 </body>
 
