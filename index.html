@@ -11,6 +11,8 @@
       --color-link: #8F9191;
       --color-link-visited: #668F8B;
       --color-link-hover: #FA7921;
+      --tab-bg: #10131C;
+      --tab-fg: #15B5E2;
     }
 
     html,
@@ -23,16 +25,16 @@
       margin: 0;
       padding: 0;
     }
-
+/*--------------------- layout -----------------*/
     .layout {
       width: 2560px;
       height: 1440px;
       display: grid;
       grid:
-        ". . . . . . ."1fr 
-        "img img img . title title ."1fr 
+        "title title title title title title title"1fr 
         "img img img links links links links"1fr 
-        "img img img . . . ."1fr 
+        "img img img links links links links"1fr 
+        "img img img links links links links"1fr 
         "search search search search search search search"1fr 
         / 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
       gap: 8px;
@@ -50,6 +52,12 @@
 
     .links {
       grid-area: links;
+      justify-content: center;      
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 80px;
+      padding-bottom: 80px;
     }
 
     .search {
@@ -57,6 +65,8 @@
       text-align: center;
     }
 
+/* don't know what these are used for yet */
+    
     .head {
       display: flex;
       flex-direction: column;
@@ -75,24 +85,19 @@
       display: flex;
       justify-content: center;
     }
-
-    .links {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-top: 20px;
-      padding-bottom: 20px;
-    }
-
+/* ----------------------------------------*/
+/*---------- accordion menu ---------------*/
     .container {
       display: flex;
-      width: 100%;
+      width: 125%;
       height: 100%;
       padding: 0;
     }
 
+/* expanded accordion tab */
+    
     .choice {
-      height: 180px;
+      height: 440px;
       box-sizing: border-box;
       padding: 0;
       overflow: hidden;
@@ -100,37 +105,50 @@
       align-items: center;
       transition: width 0.2s;
       border-radius: 3px;
-      background-color: grey
+      margin-right: 20px;
     }
 
     .expand {
       width: 65%;
+      background-color: var(--tab-bg);
+      border: 2px solid var(--tab-fg);
     }
-
-    .unset {
-      width: 16%;
-      color: black !important;
-      background-color: #ddd !important;
-    }
-
-    .small {
-      width: 5%;
-      background-color: #ddd !important;
-    }
-
-    .small>div {
-      opacity: 0;
-    }
-
-    .unset>div>p {
-      opacity: 0;
-    }
-
+    
     .expand>div {
       transition-delay: 200ms;
       opacity: 1;
     }
+    
+/* accordion tabs before any have been clicked */
+    .unset {
+      width: 16%;
+      color: white !important;
+      background-color: var(--tab-bg) !important;
+    }
+    
+     .unset>div>p {
+      opacity: 0;
+    }
+    
+/* tabs after one is selected but they are not currently active */
+    .small {
+      width: 5%;
+      background-color: var(--tab-bg) !important;
+      color: var(--tab-fg);
+      border: 2px solid var(--tab-fg);
+    }
+    .small>div>h5 {
+      padding-left: 100px;
+      transform: rotate(90deg);
+      text-align: center;
+      font-size: 30px;
+    }
+    .small>div>p, .small>div>button {
+      opacity: 0;
+    }
+    
 
+/*--------text and animations -------------*/
     li {
       font-size: 16px;
       list-style-type: none;
@@ -174,16 +192,15 @@
 
         <div class="card choice unset">
           <div class="card-body">
-            <h5 class="card-title">Card 1</h5>
+            <h5 class="card-title">development</h5>
             <p class="card-text"><a href="https://www.reddit.com">reddit</a></p>
-            
             <button type="button" class="btn">twat</button>
           </div>
         </div>
 
         <div class="card choice unset">
           <div class="card-body">
-            <h5 class="card-title">Card 2</h5>
+            <h5 class="card-title">stuff</h5>
             <p class="card-text">quick</p>
             <button type="button" class="btn">Button</button>
           </div>
@@ -191,7 +208,7 @@
 
         <div class="card choice unset ">
           <div class="card-body">
-            <h5 class="card-title">Card 3</h5>
+            <h5 class="card-title">stoff</h5>
             <p class="card-text">example</p>
             <button type="button" class="btn ">Button</button>
           </div>
@@ -199,7 +216,7 @@
 
         <div class="card choice unset">
           <div class="card-body">
-            <h5 class="card-title">Card 4</h5>
+            <h5 class="card-title">media</h5>
             <p class="card-text">text</p>
             <button type="button" class="btn">Button</button>
           </div>
@@ -207,17 +224,9 @@
 
         <div class="card choice unset">
           <div class="card-body">
-            <h5 class="card-title">Card 5</h5>
+            <h5 class="card-title">music</h5>
             <p class="card-text">content.</p>
             <button type="button" class="btn ">Button</button>
-          </div>
-        </div>
-
-        <div class="card choice unset">
-          <div class="card-body">
-            <h5 class="card-title">Card 6</h5>
-            <p class="card-text">content.</p>
-            <button type="button" class="btn">Button</button>
           </div>
         </div>
       </div>
