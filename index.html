@@ -40,7 +40,7 @@
       --color-link: #8F9191;
       --color-link-visited: #668F8B;
       --color-link-hover: #FA7921;
-      --tab-bg: #15141e;
+      --tab-bg: #15161e;
       --tab-fg: #f7768e;
     }
 
@@ -53,6 +53,24 @@
       width: 100%;
       margin: 0;
       padding: 0;
+    }
+
+    * {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 20%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
     }
 /*--------------------- layout -----------------*/
     .layout {
@@ -133,14 +151,17 @@
       float: left;
       align-items: center;
       transition: width 0.2s;
-      border-radius: 3px;
       margin-right: 20px;
+    }
+    .expand>div>h5 {
+      opacity: 0;
     }
 
     .expand {
-      width: 65%;
+      width: 50%;
       background-color: var(--tab-bg);
-      border: 2px solid var(--tab-fg);
+      border: 2px solid var(--tab-bg);
+      border-left: 2px solid var(--tab-fg);
     }
     
     .expand>div {
@@ -155,7 +176,7 @@
       background-color: var(--tab-bg) !important;
     }
     
-     .unset>div>p {
+     .unset>div>p, .unset>div>div>p {
       opacity: 0;
     }
     
@@ -172,7 +193,7 @@
       text-align: center;
       font-size: 30px;
     }
-    .small>div>p, .small>div>button {
+    .small>div>p, .small>div>button, .small>div>div>p {
       opacity: 0;
     }
     
@@ -221,41 +242,71 @@
 
         <div class="card choice unset">
           <div class="card-body">
-            <h5 class="card-title">development</h5>
-            <p class="card-text"><a href="https://www.reddit.com">reddit</a></p>
-            <button type="button" class="btn">twat</button>
-          </div>
+            <h5 class="">development</h5>
+            <p class="" style="display: inline-block; 
+                               padding-left: 200px;
+                               transform: rotate(90deg);
+                               text-align: center;
+                               color: var(--tab-fg);
+                               font-size: 30px;">development</p>
+            <div style="display: inline-block;"><p class=""><a href="https://www.reddit.com">reddit</a></p>
+              <p class="">twat</p></div>
+            </div>
         </div>
 
         <div class="card choice unset">
           <div class="card-body">
-            <h5 class="card-title">stuff</h5>
-            <p class="card-text">quick</p>
-            <button type="button" class="btn">Button</button>
+            <h5 class="">stuff</h5>
+            <p class="" style="display: inline-block; 
+                               padding-left: 200px;
+                               transform: rotate(90deg);
+                               text-align: center;
+                               color: var(--tab-fg);
+                               font-size: 30px;">stuff</p>
+            <div style="display: inline-block;"><p class=""><a href="https://www.reddit.com">reddit</a></p>
+              <p class="">twat</p></div>
           </div>
         </div>
 
         <div class="card choice unset ">
           <div class="card-body">
             <h5 class="card-title">stoff</h5>
-            <p class="card-text">example</p>
-            <button type="button" class="btn ">Button</button>
+            <p class="" style="display: inline-block; 
+                               padding-left: 200px;
+                               transform: rotate(90deg);
+                               text-align: center;
+                               color: var(--tab-fg);
+                               font-size: 30px;">stoff</p>
+            <div style="display: inline-block;"><p class=""><a href="https://www.reddit.com">reddit</a></p>
+              <p class="">twat</p></div>
           </div>
         </div>
 
         <div class="card choice unset">
           <div class="card-body">
             <h5 class="card-title">media</h5>
-            <p class="card-text">text</p>
-            <button type="button" class="btn">Button</button>
+            <p class="" style="display: inline-block; 
+                               padding-left: 200px;
+                               transform: rotate(90deg);
+                               text-align: center;
+                               color: var(--tab-fg);
+                               font-size: 30px;">media</p>
+            <div style="display: inline-block;"><p class=""><a href="https://www.reddit.com">reddit</a></p>
+              <p class="">twat</p></div>
           </div>
         </div>
 
         <div class="card choice unset">
           <div class="card-body">
             <h5 class="card-title">music</h5>
-            <p class="card-text">content.</p>
-            <button type="button" class="btn ">Button</button>
+            <p class="" style="display: inline-block; 
+                               padding-left: 200px;
+                               transform: rotate(90deg);
+                               text-align: center;
+                               color: var(--tab-fg);
+                               font-size: 30px;">music</p>
+            <div style="display: inline-block;"><p class=""><a href="https://www.reddit.com">reddit</a></p>
+              <p class="">twat</p></div>
           </div>
         </div>
       </div>
