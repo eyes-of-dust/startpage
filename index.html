@@ -47,6 +47,7 @@
     --color-link-hover: #FA7921;
     --tab-bg: #15161e;
     --tab-fg: #e6e8f4;
+    --color-red: #f7768e;
     --color-text-subtle: #e44eee;
     --color-text: #33ff44;
     --font-size-1: 1rem;
@@ -72,10 +73,11 @@
   };
 
   const COMMANDS = new Map([
-    ['d', { name: 'Drive', url: 'https://drive.google.com' }],
-    ['c', { name: 'Calendar', url: 'https://calendar.google.com' }],
+    ['a', { name: 'arch', url: 'https://archlinux.org' }],
+    ['g', { name: 'GitHub', url: 'https://github.com' }],
+    ['p', { name: 'pinterest', url: 'https://www.pinterest.co.uk/login' }],
     ['k', { name: 'Keep', url: 'https://keep.google.com' }],
-    ['a', { name: 'Chat', url: 'https://chat.openai.com' }],
+    ['9', { name: 'Chat', url: 'https://chat.openai.com' }],
     ['n', { name: 'Notion', url: 'https://www.notion.so' }],
     ['m', { name: 'Mail', url: 'https://mail.proton.me/u/0/inbox' }],
     ['f', { name: 'Figma', url: 'https://www.figma.com' }],
@@ -89,7 +91,6 @@
     ],
     ['r', { name: 'Reddit', url: 'https://reddit.com' }],
     ['v', { name: 'Vercel', url: 'https://vercel.com/dashboard' }],
-    ['g', { name: 'GitHub', url: 'https://github.com' }],
     [
       '0',
       {
@@ -122,32 +123,29 @@
     }
 
     .key {
-      color: var(--color-text);
+      font-family: "Fira Code";
+      font-size: 2rem;
+      color: var(--tab-fg);
       display: inline-block;
       text-align: center;
       width: 3ch;
     }
 
     .name {
-      color: var(--color-text-subtle);
+      font-family: "Fira Code";
+      font-size: 2rem;
+      color: var(--tab-fg);
       transition: color var(--transition-speed);
     }
 
     .command:where(:focus, :hover) .name {
-      color: var(--color-text);
-    }
-
-    @media (min-width: 400px) {
-      .commands {
-        columns: 2;
-        max-width: 20rem;
-      }
+      color: var(--color-red);
     }
 
     @media (min-width: 800px) {
       .commands {
         columns: 4;
-        max-width: 40rem;
+        max-width: 80rem;
       }
     }
   </style>
@@ -228,7 +226,7 @@
     }
 
     .input {
-      color: var(--color-text);
+      color: var(--tab-fg);
       font-size: var(--font-size-2);
       font-weight: var(--font-weight-bold);
       padding: 0;
@@ -249,7 +247,7 @@
     }
 
     .suggestion {
-      color: var(--color-text);
+      color: var(--tab-fg);
       cursor: pointer;
       font-size: var(--font-size-1);
       padding: var(--space-2);
@@ -264,7 +262,7 @@
     }
 
     .suggestion::before {
-      background-color: var(--color-text);
+      background-color: var(--tab-fg);
       bottom: var(--space-2);
       content: ' ';
       left: var(--space-2);
@@ -283,7 +281,7 @@
     }
 
     .match {
-      color: var(--color-text-subtle);
+      color: var(--color-red);
       transition: color var(--transition-speed);
     }
 
