@@ -3,11 +3,10 @@
 
 <head>
 <meta charset="utf-8" />
-<meta name="color-scheme" content="dark light" />
 <meta name="robots" content="noindex" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<title>~</title>
+<title>  ~  </title>
 
 <style>
   /* colours */
@@ -39,17 +38,11 @@
         color15              #cbcdd6   
            
         */
+  /* variables */
   :root {
-    --color-bg: #15161e;
-    --color-fg: #e6e8f4;
-    --color-link: #8F9191;
-    --color-link-visited: #668F8B;
-    --color-link-hover: #FA7921;
-    --tab-bg: #15161e;
-    --tab-fg: #e6e8f4;
-    --color-red: #f7768e;
-    --color-text-subtle: #e44eee;
-    --color-text: #33ff44;
+    --colour-bg: #15161e;
+    --colour-fg: #e6e8f4;
+    --colour-red: #f7768e;
     --font-size-1: 1rem;
     --font-size-2: 3rem;
     --font-size-base: clamp(16px, 1.6vw, 18px);
@@ -61,9 +54,80 @@
     --space-3: 4rem;
     --transition-speed: 200ms;
   }
+    html, body {
+      background: var(--colour-bg);
+      color: var(--colour-fg);
+      font-family: "Fira Code";
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+  }
+ 
+  .layout {
+      width: 2560px;
+      height: 1440px;
+      display: grid;
+      grid:
+        "title title title title title title title"1fr 
+        "img img img links links links links"1fr 
+        "img img img links links links links"1fr 
+        "img img img links links links links"1fr 
+        "search search search search search search search"1fr 
+        / 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+      gap: 8px;
+    }
+
+    .img {
+      grid-area: img;
+      text-align: center;
+    }
+
+    .title {
+      grid-area: title;
+      font-size: 40px;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .links {
+      grid-area: links;
+      justify-content: center;      
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 80px;
+      padding-bottom: 80px;
+    }
+
+    .search {
+      grid-area: search;
+      text-align: center;
+    }
+    .blinking {
+      animation: opacity 1s ease-in-out infinite;
+      opacity: 1;
+    }
+
+    @keyframes opacity {
+      0% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 1;
+      }
+    }
 </style>
 
+
 <script>
+/*---------------------------------links/commands menu--------------------------------*/
   const CONFIG = {
     commandPathDelimiter: '/',
     commandSearchDelimiter: ' ',
@@ -74,32 +138,20 @@
 
   const COMMANDS = new Map([
     ['a', { name: 'arch', url: 'https://archlinux.org' }],
-    ['g', { name: 'GitHub', url: 'https://github.com' }],
+    ['g', { name: 'GitHub', url: 'https://github.com/login' }],
     ['p', { name: 'pinterest', url: 'https://www.pinterest.co.uk/login' }],
-    ['k', { name: 'Keep', url: 'https://keep.google.com' }],
+    ['n', { name: 'notesnook', url: 'https://app.notesnook.com/notes/' }],
     ['9', { name: 'Chat', url: 'https://chat.openai.com' }],
-    ['n', { name: 'Notion', url: 'https://www.notion.so' }],
-    ['m', { name: 'Mail', url: 'https://mail.proton.me/u/0/inbox' }],
-    ['f', { name: 'Figma', url: 'https://www.figma.com' }],
-    [
-      'y',
-      {
-        name: 'YouTube',
+    ['', { name: '', url: '' }],
+    ['p', { name: 'Proton', url: 'https://mail.proton.me/login'}],
+    ['i', { name: 'Invidious', url: 'https://invidious.io' }],
+    ['y',{name: 'Y******',
         searchTemplate: '/results?search_query={}',
-        url: 'https://youtube.com/feed/subscriptions',
-      },
-    ],
+        url: 'https://yewtu.be/',
+      },],
     ['r', { name: 'Reddit', url: 'https://reddit.com' }],
-    ['v', { name: 'Vercel', url: 'https://vercel.com/dashboard' }],
-    [
-      '0',
-      {
-        name: 'local',
-        searchTemplate: ':{}',
-        suggestions: ['0 54323', '0 54324'],
-        url: 'http://localhost:3000',
-      },
-    ],
+    ['', { name: '', url: '' }],
+    ['', { name: '', url: ''}],
   ]);
 </script>
 
@@ -125,7 +177,7 @@
     .key {
       font-family: "Fira Code";
       font-size: 2rem;
-      color: var(--tab-fg);
+      color: var(--colour-fg);
       display: inline-block;
       text-align: center;
       width: 3ch;
@@ -134,12 +186,12 @@
     .name {
       font-family: "Fira Code";
       font-size: 2rem;
-      color: var(--tab-fg);
+      color: var(--colour-fg);
       transition: color var(--transition-speed);
     }
 
     .command:where(:focus, :hover) .name {
-      color: var(--color-red);
+      color: var(--colour-red);
     }
 
     @media (min-width: 800px) {
@@ -193,6 +245,7 @@
 
 <template id="search-template">
   <style>
+    /*------------------------------------search overlay--------------------------------------*/
     input,
     button {
       -moz-appearance: none;
@@ -205,7 +258,7 @@
 
     .dialog {
       align-items: center;
-      background: var(--color-bg);
+      background: var(--colour-bg);
       border: none;
       display: none;
       flex-direction: column;
@@ -226,7 +279,7 @@
     }
 
     .input {
-      color: var(--tab-fg);
+      color: var(--colour-fg);
       font-size: var(--font-size-2);
       font-weight: var(--font-weight-bold);
       padding: 0;
@@ -247,7 +300,7 @@
     }
 
     .suggestion {
-      color: var(--tab-fg);
+      color: var(--colour-fg);
       cursor: pointer;
       font-size: var(--font-size-1);
       padding: var(--space-2);
@@ -258,11 +311,11 @@
     }
 
     .suggestion:where(:focus, :hover) {
-      color: var(--color-bg);
+      color: var(--colour-bg);
     }
 
     .suggestion::before {
-      background-color: var(--tab-fg);
+      background-color: var(--colour-fg);
       bottom: var(--space-2);
       content: ' ';
       left: var(--space-2);
@@ -281,12 +334,12 @@
     }
 
     .match {
-      color: var(--color-red);
+      color: var(--colour-red);
       transition: color var(--transition-speed);
     }
 
     .suggestion:where(:focus, :hover) .match {
-      color: var(--color-bg);
+      color: var(--colour-bg);
     }
 
     @media (min-width: 700px) {
@@ -559,89 +612,8 @@
 
   customElements.define('search-component', Search);
 </script>
-
-<style>
-  html, body {
-      background: var(--color-bg);
-      color: var(--color-fg);
-      font-family: "Fira Code";
-      height: 100%;
-      width: 100%;
-      margin: 0;
-      padding: 0;
-  }
-
-  main {
-    align-items: center;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    min-height: 100vh;
-    overflow: hidden;
-    padding: var(--space-3) var(--space-2);
-    position: relative;
-    width: 100vw;
-  }
-  
-  .layout {
-      width: 2560px;
-      height: 1440px;
-      display: grid;
-      grid:
-        "title title title title title title title"1fr 
-        "img img img links links links links"1fr 
-        "img img img links links links links"1fr 
-        "img img img links links links links"1fr 
-        "search search search search search search search"1fr 
-        / 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-      gap: 8px;
-    }
-
-    .img {
-      grid-area: img;
-      text-align: center;
-    }
-
-    .title {
-      grid-area: title;
-      font-size: 40px;
-      text-align: center;
-    }
-
-    .links {
-      grid-area: links;
-      justify-content: center;      
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-top: 80px;
-      padding-bottom: 80px;
-    }
-
-    .search {
-      grid-area: search;
-      text-align: center;
-    }
-    .blinking {
-      animation: opacity 1s ease-in-out infinite;
-      opacity: 1;
-    }
-
-    @keyframes opacity {
-      0% {
-        opacity: 1;
-      }
-
-      50% {
-        opacity: 0;
-      }
-
-      100% {
-        opacity: 1;
-      }
-    }
-</style>
 </head>
+
 <body>
   <section class ="layout">
     <div class="img">
@@ -654,7 +626,6 @@
       <commands-component></commands-component>
     </div>
   </section>
-  
   <search-component></search-component>
 </body>
 </html>
